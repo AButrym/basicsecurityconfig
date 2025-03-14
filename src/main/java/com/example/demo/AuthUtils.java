@@ -14,13 +14,17 @@ import java.util.stream.Collectors;
 public class AuthUtils {
 
     public boolean canRead(long id) {
-        log.info("canRead id {}", id);
-        log.info("authorities {}", getAuthorities());
+//        log.info("canRead id {}", id);
+//        log.info("authorities {}", getAuthorities());
 //        logAuthorities();
-        return false;
+//        return false;
+
         // example of some complex logic with checking roles
-        // return hasRole("ADMIN") && id % 2 == 0 ||
-        //        hasRole("USER") && id % 2 == 1;
+         boolean res = hasRole("ADMIN") && id % 2 == 0 ||
+                hasRole("USER") && id % 2 == 1;
+        log.info("canRead {} with authorities '{}' decision = {}",
+                id, getAuthorities(), res ? "ALLOW" : "DENY");
+        return res;
     }
 
     public void logAuthorities() {
